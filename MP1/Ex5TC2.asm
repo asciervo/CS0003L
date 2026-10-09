@@ -1,0 +1,22 @@
+SYS_EXIT equ 1
+SYS_READ equ 3
+SYS_WRITE equ 4
+STDOUT equ 1
+
+section .text
+    global _start
+
+_start:
+    mov eax, SYS_WRITE
+    mov ebx, message
+    mov ecx, message
+    mov edx, message_len
+    int 0x80
+
+    mov eax, SYS_EXIT
+    xor ebx, ebx
+    int 0x80
+
+section .data
+    message db 'System notice: READY', 0xa
+    message_len equ $ - message
